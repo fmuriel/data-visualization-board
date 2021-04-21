@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Loader from "../Loader/Loader";
 import TableData from "../TableData/TableData";
 import Filters from "../Filters/Filters";
