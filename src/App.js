@@ -13,7 +13,6 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [modeFilter, setModeFilter] = useState({});
   const [statusFilter, setStatusFilter] = useState({});
-  const [selectedFilter, setSelectedFilter] = useState([]);
   const [headerRow, setHeaderRow] = useState([]);
   const [form, setForm] = useState({});
   const [sending, setSending] = useState(false);
