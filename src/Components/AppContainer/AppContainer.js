@@ -31,7 +31,9 @@ const AppContainer = ({
   return (
     <>
       <ui.Selector>
-        <ui.MainLogo src={mainLogo} />
+        <ui.LogoWrapper>
+          <ui.MainLogo src={mainLogo} />
+        </ui.LogoWrapper>
         <h1>Where is my shipment?</h1>
         <p>
           Please select the client you'd like to see shipments from, or choose
