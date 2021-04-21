@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import * as ui from "../../Styles/reusableStyles";
+import * as ui from "../../Styles/common";
 
 const Filters = ({ rows, setRows, modeFilter, statusFilter }) => {
-  const [auxRows, setAuxRows] = useState(rows);
+  const auxRows = rows;
   const [filterStatus, setFilterStatus] = useState({
     mode: "all",
     status: "all",

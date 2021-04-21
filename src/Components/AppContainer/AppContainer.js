@@ -4,7 +4,6 @@ import TableData from "../TableData/TableData";
 import Filters from "../Filters/Filters";
 import ClientSelector from "../ClientsSelector/ClientsSelector";
 import * as ui from "./styles";
-import AddShipment from "../AddShipment/AddShipment";
 import mainLogo from "../../images/main-logo.png";
 
 const AppContainer = ({
@@ -14,14 +13,11 @@ const AppContainer = ({
   clients,
   loadingClients,
   loadingRows,
+  errorMessage,
   statusFilter,
   modeFilter,
   rows,
   setRows,
-  form,
-  setForm,
-  sending,
-  setSending,
 }) => {
   const handleClientSelect = (e, client) => {
     e.stopPropagation();
@@ -60,15 +56,10 @@ const AppContainer = ({
                 rows={rows}
                 setRows={setRows}
               />
-              <TableData headerRow={headerRow} rows={rows} />
-              <AddShipment
-                modeFilter={modeFilter}
-                statusFilter={statusFilter}
-                form={form}
-                setForm={setForm}
-                sending={sending}
-                setSending={setSending}
+              <TableData
+                errorMessage={errorMessage}
                 headerRow={headerRow}
+                rows={rows}
               />
             </>
           ))}

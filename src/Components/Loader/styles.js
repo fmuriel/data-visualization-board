@@ -11,6 +11,7 @@ export const LoadAnimation = keyframes`
 `;
 
 export const Loader = styled.div`
+  margin-top: 3rem;
   display: inline-block;
   position: relative;
   width: 80px;

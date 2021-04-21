@@ -15,12 +15,12 @@ const ClientSelector = ({ clients, handleClientSelect }) => {
               {client}
             </ui.Chip>
           ))}
+        <ui.SelectAllChip>
+          <ui.Chip selectAll onClick={(e) => handleClientSelect(e, "all")}>
+            Select all shipments
+          </ui.Chip>
+        </ui.SelectAllChip>
       </ui.ChipsContainer>
-      <ui.SelectAllChip>
-        <ui.Chip selectAll onClick={(e) => handleClientSelect(e, "all")}>
-          Select all shipments
-        </ui.Chip>
-      </ui.SelectAllChip>
     </>
   );
 };
