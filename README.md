@@ -32,6 +32,11 @@ This app was developed just using React.js and Styled Components:
 
 Run `npm install` at the project directory to install all necessary dependencies.
 
+### Environment Variables
+Before launching the app:
+1) Please copy the .env.example file located at the root folder, and rename it to .env.local
+2) Replace the values with the ones I've sent over e-mail.
+
 ### Starting the app
 
 Run `npm start` and open your browser at [http://localhost:3000](http://localhost:3000) to start navigating.
