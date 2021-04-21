@@ -1,6 +1,13 @@
+import * as ui from "./styles";
+
 const Loader = () => {
   return (
-    <p>Loading data...</p>
-  )
-}
+    <ui.Loader>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </ui.Loader>
+  );
+};
 export default Loader;

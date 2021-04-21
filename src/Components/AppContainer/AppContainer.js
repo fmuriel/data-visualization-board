@@ -46,29 +46,31 @@ const AppContainer = ({
           />
         )}
       </ui.Selector>
-      {selectedClient &&
-        (loadingRows ? (
-          <Loader />
-        ) : (
-          <>
-            <Filters
-              modeFilter={modeFilter}
-              statusFilter={statusFilter}
-              rows={rows}
-              setRows={setRows}
-            />
-            <TableData headerRow={headerRow} rows={rows} />
-            <AddShipment
-              modeFilter={modeFilter}
-              statusFilter={statusFilter}
-              form={form}
-              setForm={setForm}
-              sending={sending}
-              setSending={setSending}
-              headerRow={headerRow}
-            />
-          </>
-        ))}
+      <ui.MainSection>
+        {selectedClient &&
+          (loadingRows ? (
+            <Loader />
+          ) : (
+            <>
+              <Filters
+                modeFilter={modeFilter}
+                statusFilter={statusFilter}
+                rows={rows}
+                setRows={setRows}
+              />
+              <TableData headerRow={headerRow} rows={rows} />
+              <AddShipment
+                modeFilter={modeFilter}
+                statusFilter={statusFilter}
+                form={form}
+                setForm={setForm}
+                sending={sending}
+                setSending={setSending}
+                headerRow={headerRow}
+              />
+            </>
+          ))}
+      </ui.MainSection>
     </>
   );
 };

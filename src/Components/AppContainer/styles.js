@@ -18,3 +18,9 @@ export const Selector = styled.div`
     font-size: 1.5rem;
   }
 `;
+
+export const MainSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
