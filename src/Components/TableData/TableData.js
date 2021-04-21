@@ -2,12 +2,6 @@ import React from "react";
 import * as ui from "./styles";
 
 const Tabledata = ({ headerRow, rows }) => {
-  const orderByDate = (a, b) => {
-    let dateA = new Date(a.Estimated_Departure);
-    let dateB = new Date(b.Estimated_Departure);
-    return dateA - dateB;
-  };
-
   return (
     <ui.TableContainer>
       <ui.TableRow>

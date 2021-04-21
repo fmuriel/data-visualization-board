@@ -1,5 +1,4 @@
 import "./App.css";
-import "date-fns";
 import React, { useEffect, useState } from "react";
 import AppContainer from "./Components/AppContainer/AppContainer";
 import { SHEET_ID, doc, auth } from "./Constants/configVariables";
