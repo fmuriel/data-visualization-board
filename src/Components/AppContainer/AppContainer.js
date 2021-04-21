@@ -5,6 +5,7 @@ import Filters from "../Filters/Filters";
 import ClientSelector from "../ClientsSelector/ClientsSelector";
 import * as ui from "./styles";
 import AddShipment from "../AddShipment/AddShipment";
+import mainLogo from "../../images/main-logo.png";
 
 const AppContainer = ({
   headerRow,
@@ -30,6 +31,7 @@ const AppContainer = ({
   return (
     <>
       <ui.Selector>
+        <ui.MainLogo src={mainLogo} />
         <h1>Where is my shipment?</h1>
         <p>
           Please select the client you'd like to see shipments from, or choose
