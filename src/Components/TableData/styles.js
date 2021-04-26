@@ -7,7 +7,7 @@ export const TableContainer = styled.table`
 `;
 
 export const TableRow = styled.tr`
-  &:not(:first-child):not(:last-child) {
+  &:not(:last-child) {
     border-bottom: 1px solid #444857;
   }
   th {

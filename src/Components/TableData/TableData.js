@@ -1,14 +1,14 @@
 import React from "react";
 import * as ui from "./styles";
 
-const Tabledata = ({ errorMessage, headerRow, rowsRendered }) => {
+const Tabledata = ({ headerRow, rowsRendered }) => {
   return (
     <>
       <ui.TableContainer>
         <thead>
           <ui.TableRow>
             {headerRow.map((row) => (
-              <th>{row}</th>
+              <th key={row}>{row}</th>
             ))}
           </ui.TableRow>
         </thead>

@@ -7,31 +7,24 @@ import { filterRowsByClient } from "./helpers/filterRowsByClient";
 import { getHeaderRow } from "./helpers/getHeaderRow";
 
 const App = () => {
-  //Cleaned up loader to start in an undefined state
-  const [loadingClients, setLoadingClients] = useState();
-  const [loadingHeaderRow, setLoadingHeaderRow] = useState();
-  const [loadingRows, setLoadingRows] = useState();
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
+  const [modeFilter, setModeFilter] = useState({});
+  const [statusFilter, setStatusFilter] = useState({});
+  const [headerRow, setHeaderRow] = useState([]);
   const [rows, setRows] = useState([]);
   const [rowsRendered, setRowsRendered] = useState([]);
+
+  //Loading and errors
+  const [loadingClients, setLoadingClients] = useState();
+  const [loadingRows, setLoadingRows] = useState();
+  const [loadingHeaderRow, setLoadingHeaderRow] = useState();
   const [errorMessage, setErrorMessage] = useState({
     status: false,
     msg: "",
   });
-  const [modeFilter, setModeFilter] = useState({});
-  const [statusFilter, setStatusFilter] = useState({});
-  const [headerRow, setHeaderRow] = useState([]);
-
-  //Deberia tener unas rows que me traigo iniciales y que permanecen intactas como const
-  //Y un rowsRendered al que inicializo con las rows que me traigo
-  //Me armo una copia de esas rows iniciales
-  //Para filtrarlas por status
-  //Y filtradas, se las seteo al render
-  //Cuando quiero vovler a filtrar, uso la data que me copié
 
   //On mount
-
   const filterClientsForChips = async () => {
     setLoadingClients(true);
     try {
@@ -51,6 +44,7 @@ const App = () => {
     }
   };
 
+  //When selecting client
   const setFilters = async () => {
     try {
       const rowsData = await getRows();
@@ -83,7 +77,7 @@ const App = () => {
     });
     try {
       const rowsData = await getRows();
-      //Saving initial data that will be untouched
+      //Saving initial data that will be left untouched
       setRows(filterRowsByClient(selectedClient, rowsData));
       //Saving data to be filtered
       setRowsRendered(filterRowsByClient(selectedClient, rowsData));
@@ -111,20 +105,19 @@ const App = () => {
 
   return (
     <AppContainer
-      headerRow={headerRow}
+      clients={clients}
       selectedClient={selectedClient}
       setSelectedClient={setSelectedClient}
-      clients={clients}
-      loadingClients={loadingClients}
-      loadingRows={loadingRows}
-      loadingHeaderRow={loadingHeaderRow}
-      errorMessage={errorMessage}
       statusFilter={statusFilter}
       modeFilter={modeFilter}
+      headerRow={headerRow}
       rows={rows}
-      setRows={setRows}
       rowsRendered={rowsRendered}
       setRowsRendered={setRowsRendered}
+      loadingClients={loadingClients}
+      loadingHeaderRow={loadingHeaderRow}
+      loadingRows={loadingRows}
+      errorMessage={errorMessage}
     />
   );
 };

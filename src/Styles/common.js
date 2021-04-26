@@ -85,3 +85,21 @@ export const AddShipInput = styled.input`
   border: 1px solid transparent;
   border-radius: 0.5em;
 `;
+
+export const ResetButton = styled.button`
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  outline: none;
+  color: white;
+  background-color: #2eccbc;
+  border: none;
+  border-radius: 0.5rem;
+  &:hover {
+    background-color: #4f535f;
+  }
+  &:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+`;

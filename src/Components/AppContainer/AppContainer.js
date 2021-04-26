@@ -18,7 +18,6 @@ const AppContainer = ({
   statusFilter,
   modeFilter,
   rows,
-  setRows,
   rowsRendered,
   setRowsRendered,
 }) => {
@@ -42,6 +41,7 @@ const AppContainer = ({
           />
         )}
       </ui.Selector>
+      {/*The Main Section will only have to think about loading, rendering error or table once the user selects a client */}
       {selectedClient && (
         <ui.MainSection>
           {loadingRows ? (
@@ -59,14 +59,12 @@ const AppContainer = ({
                 modeFilter={modeFilter}
                 statusFilter={statusFilter}
                 rows={rows}
-                // setRows={setRows}
                 rowsRendered={rowsRendered}
                 setRowsRendered={setRowsRendered}
               />
               <TableData
                 errorMessage={errorMessage}
                 headerRow={headerRow}
-                // rows={rows}
                 rowsRendered={rowsRendered}
               />
             </>

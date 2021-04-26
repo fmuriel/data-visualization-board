@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
 import * as ui from "../../Styles/common";
+import { initialFilterValues } from "../../constants/initialFilterValues";
 
-const Filters = ({
-  rows,
-  rowsRendered,
-  setRowsRendered,
-  modeFilter,
-  statusFilter,
-}) => {
-  const [filterStatus, setFilterStatus] = useState({
-    mode: "all",
-    status: "all",
-    date: "all",
-  });
+const Filters = ({ rows, setRowsRendered, modeFilter, statusFilter }) => {
+  const [filterStatus, setFilterStatus] = useState(initialFilterValues);
 
   useEffect(() => {
+    //Spread to create a shallow copy
+    //I don't want to touch the initial data because I will need that to keep on filtering
+    //And if I want to unfilter the data, the rowsRendered will be setted to the initial value
     let auxArray = [...rows];
 
     if (filterStatus.mode !== "all") {
@@ -51,7 +45,13 @@ const Filters = ({
     });
   };
 
-  // console.log(rows, "las rows afuera de todo");
+  const resetFilters = (e) => {
+    e.stopPropagation();
+    setFilterStatus({
+      ...filterStatus,
+      ...initialFilterValues,
+    });
+  };
 
   return (
     <>
@@ -63,7 +63,9 @@ const Filters = ({
             <ui.Selector name="mode" onChange={(e) => handleFilters(e)}>
               <option value="all">Select filter</option>
               {modeFilter.map((filter) => (
-                <option value={filter}>{filter}</option>
+                <option key={filter} value={filter}>
+                  {filter}
+                </option>
               ))}
             </ui.Selector>
           </ui.Action>
@@ -73,7 +75,9 @@ const Filters = ({
             <ui.Selector name="status" onChange={(e) => handleFilters(e)}>
               <option value="all">Select all</option>
               {statusFilter.map((filter) => (
-                <option value={filter}>{filter}</option>
+                <option key={filter} value={filter}>
+                  {filter}
+                </option>
               ))}
             </ui.Selector>
           </ui.Action>
@@ -85,6 +89,12 @@ const Filters = ({
               <option value="departure">Departure</option>
               <option value="arrival">Arrival</option>
             </ui.Selector>
+          </ui.Action>
+
+          <ui.Action>
+            <ui.ResetButton onClick={(e) => resetFilters(e)}>
+              Reset filters
+            </ui.ResetButton>
           </ui.Action>
         </ui.ActionBox>
       </ui.ActionsContainer>
