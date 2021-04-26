@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import AppContainer from "./Components/AppContainer/AppContainer";
 import { createFilter } from "./utils/common";
 import { getRows } from "./helpers/getRows";
-import { getFilteredRows } from "./helpers/getFilteredRows";
+import { filterRowsByClient } from "./helpers/filterRowsByClient";
 import { getHeaderRow } from "./helpers/getHeaderRow";
 
 const App = () => {
@@ -33,9 +33,9 @@ const App = () => {
       }
 
       setClients(clientsArray);
+      setLoadingClients(false);
     } catch (err) {
       console.log(err);
-    } finally {
       setLoadingClients(false);
     }
   };
@@ -44,20 +44,18 @@ const App = () => {
     setLoadingHeaderRow(true);
     try {
       setHeaderRow(await getHeaderRow());
+      setLoadingHeaderRow(false);
     } catch (err) {
       console.log(err);
-    } finally {
       setLoadingHeaderRow(false);
     }
   };
 
   const setFilters = () => {
-    const modes = [];
-    const status = [];
-    createFilter(rows, modes, "Mode");
+    let modes = createFilter(rows, "Mode");
     setModeFilter(modes);
 
-    createFilter(rows, status, "Status");
+    let status = createFilter(rows, "Status");
     setStatusFilter(status);
   };
 
@@ -68,8 +66,9 @@ const App = () => {
       msg: "",
     });
     try {
-      const filteredRows = await getFilteredRows(selectedClient);
-      setRows(filteredRows);
+      const rowsData = await getRows();
+      setRows(filterRowsByClient(selectedClient, rowsData));
+      setLoadingRows(false);
     } catch (err) {
       console.log(err);
       setErrorMessage({
@@ -77,7 +76,6 @@ const App = () => {
         msg:
           "There was an error rendering the table, please refresh and try again.",
       });
-    } finally {
       setLoadingRows(false);
     }
   };

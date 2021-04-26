@@ -1,6 +1,8 @@
 import React from "react";
 import * as ui from "./styles";
 
+//Missing a key
+
 const ClientSelector = ({ clients, handleClientSelect }) => {
   return (
     <>
@@ -10,6 +12,7 @@ const ClientSelector = ({ clients, handleClientSelect }) => {
           .map((client) => (
             <ui.Chip
               value={client}
+              key={client}
               onClick={(e) => handleClientSelect(e, client)}
             >
               {client}

@@ -47,6 +47,9 @@ const Filters = ({ rows, setRows, modeFilter, statusFilter }) => {
     });
   };
 
+  console.log(modeFilter, "mode filter");
+  console.log(statusFilter, "status filter");
+
   return (
     <>
       <ui.ActionsContainer>
