@@ -5,15 +5,18 @@ import { createFilter } from "./utils/common";
 import { getRows } from "./helpers/getRows";
 import { filterRowsByClient } from "./helpers/filterRowsByClient";
 import { getHeaderRow } from "./helpers/getHeaderRow";
+import { useLocalStorage } from "./Hooks/useLocalStorage";
 
 const App = () => {
-  const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
-  const [modeFilter, setModeFilter] = useState({});
-  const [statusFilter, setStatusFilter] = useState({});
-  const [headerRow, setHeaderRow] = useState([]);
-  const [rows, setRows] = useState([]);
-  const [rowsRendered, setRowsRendered] = useState([]);
+
+  //Persisted by Local Storage
+  const [clients, setClients] = useLocalStorage("clients", []);
+  const [modeFilter, setModeFilter] = useLocalStorage("modeFilter", {});
+  const [statusFilter, setStatusFilter] = useLocalStorage("statusFilter", {});
+  const [headerRow, setHeaderRow] = useLocalStorage("headerRow", []);
+  const [rows, setRows] = useLocalStorage("rows", []);
+  const [rowsRendered, setRowsRendered] = useLocalStorage("rowsRendered", []);
 
   //Loading and errors
   const [loadingClients, setLoadingClients] = useState();
