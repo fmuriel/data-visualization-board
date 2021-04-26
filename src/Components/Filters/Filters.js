@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as ui from "../../Styles/common";
 
-const Filters = ({ rows, setRows, modeFilter, statusFilter }) => {
-  const auxRows = rows;
+const Filters = ({
+  rows,
+  rowsRendered,
+  setRowsRendered,
+  modeFilter,
+  statusFilter,
+}) => {
   const [filterStatus, setFilterStatus] = useState({
     mode: "all",
     status: "all",
@@ -10,7 +15,7 @@ const Filters = ({ rows, setRows, modeFilter, statusFilter }) => {
   });
 
   useEffect(() => {
-    let auxArray = auxRows;
+    let auxArray = [...rows];
 
     if (filterStatus.mode !== "all") {
       auxArray = auxArray.filter((row) => row.Mode === filterStatus.mode);
@@ -35,8 +40,7 @@ const Filters = ({ rows, setRows, modeFilter, statusFilter }) => {
 
       auxArray = [...auxArray].sort(orderByDate);
     }
-
-    setRows(auxArray);
+    setRowsRendered(auxArray);
   }, [filterStatus]);
 
   const handleFilters = (e) => {
@@ -47,8 +51,7 @@ const Filters = ({ rows, setRows, modeFilter, statusFilter }) => {
     });
   };
 
-  console.log(modeFilter, "mode filter");
-  console.log(statusFilter, "status filter");
+  // console.log(rows, "las rows afuera de todo");
 
   return (
     <>

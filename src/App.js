@@ -7,12 +7,14 @@ import { filterRowsByClient } from "./helpers/filterRowsByClient";
 import { getHeaderRow } from "./helpers/getHeaderRow";
 
 const App = () => {
-  const [loadingClients, setLoadingClients] = useState(false);
-  const [loadingHeaderRow, setLoadingHeaderRow] = useState(false);
-  const [loadingRows, setLoadingRows] = useState(false);
+  //Cleaned up loader to start in an undefined state
+  const [loadingClients, setLoadingClients] = useState();
+  const [loadingHeaderRow, setLoadingHeaderRow] = useState();
+  const [loadingRows, setLoadingRows] = useState();
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
   const [rows, setRows] = useState([]);
+  const [rowsRendered, setRowsRendered] = useState([]);
   const [errorMessage, setErrorMessage] = useState({
     status: false,
     msg: "",
@@ -20,6 +22,15 @@ const App = () => {
   const [modeFilter, setModeFilter] = useState({});
   const [statusFilter, setStatusFilter] = useState({});
   const [headerRow, setHeaderRow] = useState([]);
+
+  //Deberia tener unas rows que me traigo iniciales y que permanecen intactas como const
+  //Y un rowsRendered al que inicializo con las rows que me traigo
+  //Me armo una copia de esas rows iniciales
+  //Para filtrarlas por status
+  //Y filtradas, se las seteo al render
+  //Cuando quiero vovler a filtrar, uso la data que me copié
+
+  //On mount
 
   const filterClientsForChips = async () => {
     setLoadingClients(true);
@@ -40,6 +51,19 @@ const App = () => {
     }
   };
 
+  const setFilters = async () => {
+    try {
+      const rowsData = await getRows();
+      let modes = createFilter(rowsData, "Mode");
+      setModeFilter(modes);
+
+      let status = createFilter(rowsData, "Status");
+      setStatusFilter(status);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const populateHeaderRow = async () => {
     setLoadingHeaderRow(true);
     try {
@@ -51,14 +75,6 @@ const App = () => {
     }
   };
 
-  const setFilters = () => {
-    let modes = createFilter(rows, "Mode");
-    setModeFilter(modes);
-
-    let status = createFilter(rows, "Status");
-    setStatusFilter(status);
-  };
-
   const populateTable = async () => {
     setLoadingRows(true);
     setErrorMessage({
@@ -67,7 +83,10 @@ const App = () => {
     });
     try {
       const rowsData = await getRows();
+      //Saving initial data that will be untouched
       setRows(filterRowsByClient(selectedClient, rowsData));
+      //Saving data to be filtered
+      setRowsRendered(filterRowsByClient(selectedClient, rowsData));
       setLoadingRows(false);
     } catch (err) {
       console.log(err);
@@ -85,13 +104,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    setFilters();
     populateHeaderRow();
     populateTable();
   }, [selectedClient]);
-
-  useEffect(() => {
-    setFilters();
-  }, [rows]);
 
   return (
     <AppContainer
@@ -107,6 +123,8 @@ const App = () => {
       modeFilter={modeFilter}
       rows={rows}
       setRows={setRows}
+      rowsRendered={rowsRendered}
+      setRowsRendered={setRowsRendered}
     />
   );
 };

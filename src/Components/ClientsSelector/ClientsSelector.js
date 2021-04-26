@@ -1,9 +1,7 @@
 import React from "react";
 import * as ui from "./styles";
 
-//Missing a key
-
-const ClientSelector = ({ clients, handleClientSelect }) => {
+const ClientSelector = ({ clients, setSelectedClient }) => {
   return (
     <>
       <ui.ChipsContainer>
@@ -13,13 +11,22 @@ const ClientSelector = ({ clients, handleClientSelect }) => {
             <ui.Chip
               value={client}
               key={client}
-              onClick={(e) => handleClientSelect(e, client)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedClient(client);
+              }}
             >
               {client}
             </ui.Chip>
           ))}
         <ui.SelectAllChip>
-          <ui.Chip selectAll onClick={(e) => handleClientSelect(e, "all")}>
+          <ui.Chip
+            selectAll
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedClient("all");
+            }}
+          >
             Select all shipments
           </ui.Chip>
         </ui.SelectAllChip>

@@ -1,18 +1,9 @@
 import React from "react";
 import * as ui from "./styles";
 
-//Forgot to add thead tbody structure
-
-const Tabledata = ({ errorMessage, headerRow, rows }) => {
+const Tabledata = ({ errorMessage, headerRow, rowsRendered }) => {
   return (
     <>
-      {errorMessage.status && (
-        <ui.TableContainer>
-          <tbody>
-            <ui.TableRow>{errorMessage.msg}</ui.TableRow>
-          </tbody>
-        </ui.TableContainer>
-      )}
       <ui.TableContainer>
         <thead>
           <ui.TableRow>
@@ -22,8 +13,8 @@ const Tabledata = ({ errorMessage, headerRow, rows }) => {
           </ui.TableRow>
         </thead>
         <tbody>
-          {rows.length > 0 ? (
-            rows.map((row, key) => (
+          {rowsRendered.length > 0 ? (
+            rowsRendered.map((row, key) => (
               <ui.TableRow key={key}>
                 <td>{row.Shipment_ID}</td>
                 <td>{row.Client_Name}</td>
