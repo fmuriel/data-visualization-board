@@ -1,4 +1,4 @@
-import { SHEET_ID, doc, auth } from "../constants/configVariables";
+import { SHEET_ID, doc, auth } from "../Constants/configVariables";
 
 export const getHeaderRow = async () => {
   try {

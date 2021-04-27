@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as ui from "../../Styles/common";
-import { initialFilterValues } from "../../constants/initialFilterValues";
+import { initialFilterValues } from "../../Constants/initialFilterValues";
 
 const Filters = ({ rows, setRowsRendered, modeFilter, statusFilter }) => {
   const [filterStatus, setFilterStatus] = useState(initialFilterValues);
