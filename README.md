@@ -1,12 +1,12 @@
-# Freight Forwarder Engagement Solution | Logixboard Challenge
+# Data Visualization Board
 
-The freight forwarder consulting this board would like to see where shipments are in the world. They will be able to:
+The KpopDiscs Supplier Store constumers consulting this board would like to see where their shipments are in the world. They will be able to:
 
 - Filter a specific list of shipments according to the client
 - Request all shipments
 
 Once the shipments are loaded into the board, they will be able to:
-- Filter the shipments by Mode
+- Filter the shipments by Courier
 - Filter the shipments by Status
 - Order the requests by ascending Estimated Departure or Estimated Arrival
 - Filter and order at the same time, combining the options above
@@ -22,11 +22,10 @@ This app was developed just using React.js and Styled Components:
 - The main component, TableData.js: I'm aware that MaterialUI's Table is very easy to implement and has many filtering functions incorporated. I purposely avoided using such component and tools in order to display the use of React's hooks and functional components mixed with native Javascript filters.
 
 ## Challenges and To Do
-- I believe one the most important priorities was not to mess with the data, which was inconsistent in columns such as Origin an Destination. If possible, I would have preferred to normalize the data for this two sets of information, which would've allowed me to create two extra filters and include them in the current Filter component.
-- If the normalization would've been possible, I woudl've liked to change from table rows to dropdows, and by clicking on them, displaying the Route Details section as a map connecting the Origin and Destination and Transit time for the Active Shipments.
+- Having more time in my hands, my first priority would've been testing using Jest.
 - I would have liked to include a counter for the different shipment' statuses.
-- Support to insert more shipments into the list: the form and the post function where created, but I kept getting a Network Error that I didn't have enough time to finish debugging.
-- I would've liked to implement at least PropTypes, and with more time, Typescript.
+- Support to insert more shipments into the list.
+- I would've liked to implement at least PropTypes, and with more time, TypeScript.
 
 ### Initial setup
 
