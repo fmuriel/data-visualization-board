@@ -6,6 +6,7 @@ The KpopDiscs Supplier Store constumers consulting this board would like to see 
 - Request all shipments
 
 Once the shipments are loaded into the board, they will be able to:
+
 - Filter the shipments by Courier
 - Filter the shipments by Status
 - Order the requests by ascending Estimated Departure or Estimated Arrival
@@ -14,6 +15,7 @@ Once the shipments are loaded into the board, they will be able to:
 If the web app were to lose connectivity, the freight forwarder will be able to filter and see the initial status for the last shipments request he made (by client or all shipments)
 
 ## Decisions
+
 This app was developed just using React.js and Styled Components:
 
 - Since this was a simple dashboard with a few components, I tried to avoid overloading the application with tools such as Context API or Redux.
@@ -22,6 +24,7 @@ This app was developed just using React.js and Styled Components:
 - The main component, TableData.js: I'm aware that MaterialUI's Table is very easy to implement and has many filtering functions incorporated. I purposely avoided using such component and tools in order to display the use of React's hooks and functional components mixed with native Javascript filters.
 
 ## Challenges and To Do
+
 - Having more time in my hands, my first priority would've been testing using Jest.
 - I would have liked to include a counter for the different shipment' statuses.
 - Support to insert more shipments into the list.
@@ -32,9 +35,11 @@ This app was developed just using React.js and Styled Components:
 Run `npm install` at the project directory to install all necessary dependencies.
 
 ### Environment Variables
+
 Before launching the app:
-1) Please copy the .env.example file located at the root folder, and rename it to .env.local
-2) Replace the values with the ones I've sent over e-mail.
+
+1. Please copy the .env.example file located at the root folder, and rename it to .env.local
+2. Replace the values with the ones I've sent over e-mail.
 
 ### Starting the app
 

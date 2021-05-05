@@ -12,7 +12,10 @@ const App = () => {
 
   //Persisted by Local Storage
   const [clients, setClients] = useLocalStorage("clients", []);
-  const [modeFilter, setModeFilter] = useLocalStorage("modeFilter", {});
+  const [courierFilter, setCourierFilter] = useLocalStorage(
+    "courierFilter",
+    {}
+  );
   const [statusFilter, setStatusFilter] = useLocalStorage("statusFilter", {});
   const [headerRow, setHeaderRow] = useLocalStorage("headerRow", []);
   const [rows, setRows] = useLocalStorage("rows", []);
@@ -26,6 +29,21 @@ const App = () => {
     status: false,
     msg: "",
   });
+
+  const dayValue = 60000 * 1440;
+
+  const addDay = (dt, dayValue) => {
+    return new Date(dt.getTime() + dayValue);
+  };
+
+  const loopingOverWeek = () => {
+    let week = [];
+    for (let i = 0; i < 7; i++) {
+      week.push(addDay(new Date(), dayValue * i));
+    }
+  };
+
+  console.log(loopingOverWeek());
 
   //On mount
   const filterClientsForChips = async () => {
@@ -51,8 +69,8 @@ const App = () => {
   const setFilters = async () => {
     try {
       const rowsData = await getRows();
-      let modes = createFilter(rowsData, "Mode");
-      setModeFilter(modes);
+      let couriers = createFilter(rowsData, "Courier");
+      setCourierFilter(couriers);
 
       let status = createFilter(rowsData, "Status");
       setStatusFilter(status);
@@ -112,7 +130,7 @@ const App = () => {
       selectedClient={selectedClient}
       setSelectedClient={setSelectedClient}
       statusFilter={statusFilter}
-      modeFilter={modeFilter}
+      courierFilter={courierFilter}
       headerRow={headerRow}
       rows={rows}
       rowsRendered={rowsRendered}

@@ -22,7 +22,7 @@ export const ActionBox = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  border-top: 2px solid #2eccbc;
+  border-top: 2px solid #7e57c2;
   background-color: #1e1f26;
 `;
 
@@ -93,7 +93,7 @@ export const ResetButton = styled.button`
   font-weight: bold;
   outline: none;
   color: white;
-  background-color: #2eccbc;
+  background-color: #7e57c2;
   border: none;
   border-radius: 0.5rem;
   &:hover {

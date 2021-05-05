@@ -1,5 +1,5 @@
 export const initialFilterValues = {
-  mode: "all",
+  courier: "all",
   status: "all",
   date: "all",
 };
