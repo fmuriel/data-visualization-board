@@ -11,11 +11,12 @@ export const Chip = styled.button`
   cursor: pointer;
   padding: 1rem;
   margin-bottom: 0.5rem;
+  height: 3.5rem;
   font-size: 1rem;
   font-weight: bold;
   color: white;
   outline: none;
-  background-color: ${(props) => (props.selectAll ? "#2ECCBC" : "#252830")};
+  background-color: #7e57c2;
   border: none;
   border-radius: 15px;
   &:hover {
@@ -27,5 +28,5 @@ export const Chip = styled.button`
 `;
 
 export const SelectAllChip = styled.div`
-  margin-top: 1rem;
+  margin-top: 0;
 `;

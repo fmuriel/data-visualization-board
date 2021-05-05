@@ -18,9 +18,9 @@ const Tabledata = ({ headerRow, rowsRendered }) => {
               <ui.TableRow key={key}>
                 <td>{row.Shipment_ID}</td>
                 <td>{row.Client_Name}</td>
-                <td>{row.Origin}</td>
+                <td>{row.Purchase}</td>
                 <td>{row.Destination}</td>
-                <td>{row.Mode}</td>
+                <td>{row.Courier}</td>
                 <td>{row.Estimated_Departure}</td>
                 <td>{row.Estimated_Arrival}</td>
                 <td>{row.Status}</td>

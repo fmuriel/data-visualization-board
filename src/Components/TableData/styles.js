@@ -12,7 +12,7 @@ export const TableRow = styled.tr`
   }
   th {
     padding: 1.2rem 1rem;
-    background-color: #0da394;
+    background-color: #7e57c2;
   }
   td {
     padding: 1rem;

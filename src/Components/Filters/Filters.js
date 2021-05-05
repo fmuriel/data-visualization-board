@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as ui from "../../Styles/common";
 import { initialFilterValues } from "../../Constants/initialFilterValues";
 
-const Filters = ({ rows, setRowsRendered, modeFilter, statusFilter }) => {
+const Filters = ({ rows, setRowsRendered, courierFilter, statusFilter }) => {
   const [filterStatus, setFilterStatus] = useState(initialFilterValues);
 
   useEffect(() => {
@@ -11,8 +11,8 @@ const Filters = ({ rows, setRowsRendered, modeFilter, statusFilter }) => {
     //And if I want to unfilter the data, the rowsRendered will be setted to the initial value
     let auxArray = [...rows];
 
-    if (filterStatus.mode !== "all") {
-      auxArray = auxArray.filter((row) => row.Mode === filterStatus.mode);
+    if (filterStatus.courier !== "all") {
+      auxArray = auxArray.filter((row) => row.Courier === filterStatus.courier);
     }
 
     if (filterStatus.status !== "all") {
@@ -59,10 +59,10 @@ const Filters = ({ rows, setRowsRendered, modeFilter, statusFilter }) => {
         <ui.ActionTitle>Filters</ui.ActionTitle>
         <ui.ActionBox>
           <ui.Action>
-            <ui.ActionTag>Mode</ui.ActionTag>
-            <ui.Selector name="mode" onChange={(e) => handleFilters(e)}>
+            <ui.ActionTag>Courier</ui.ActionTag>
+            <ui.Selector name="courier" onChange={(e) => handleFilters(e)}>
               <option value="all">Select filter</option>
-              {modeFilter.map((filter) => (
+              {courierFilter.map((filter) => (
                 <option key={filter} value={filter}>
                   {filter}
                 </option>

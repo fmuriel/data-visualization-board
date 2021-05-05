@@ -16,7 +16,7 @@ const AppContainer = ({
   loadingRows,
   errorMessage,
   statusFilter,
-  modeFilter,
+  courierFilter,
   rows,
   rowsRendered,
   setRowsRendered,
@@ -27,7 +27,7 @@ const AppContainer = ({
         <ui.LogoWrapper>
           <ui.MainLogo src={mainLogo} />
         </ui.LogoWrapper>
-        <h1>Where is my shipment?</h1>
+        <h1>Where is my package?</h1>
         <p>
           Please select the client you'd like to see shipments from, or choose
           select all to see all shipments being moved:
@@ -56,7 +56,7 @@ const AppContainer = ({
                 </uiTable.TableContainer>
               )}
               <Filters
-                modeFilter={modeFilter}
+                courierFilter={courierFilter}
                 statusFilter={statusFilter}
                 rows={rows}
                 rowsRendered={rowsRendered}

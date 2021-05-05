@@ -21,7 +21,6 @@ const ClientSelector = ({ clients, setSelectedClient }) => {
           ))}
         <ui.SelectAllChip>
           <ui.Chip
-            selectAll
             onClick={(e) => {
               e.stopPropagation();
               setSelectedClient("all");
