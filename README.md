@@ -1,18 +1,18 @@
-# Data Visualization Board
+# KpopDiscs Supplier Store - Package Visualization Board
 
-The KpopDiscs Supplier Store constumers consulting this board would like to see where their shipments are in the world. They will be able to:
+The stores consulting this board would like to see where their packages are in the world. They will be able to:
 
-- Filter a specific list of shipments according to the client
-- Request all shipments
+- Filter a specific list of packages according to the client.
+- Request all packages.
 
-Once the shipments are loaded into the board, they will be able to:
+Once the packages are loaded into the board, they will be able to:
 
-- Filter the shipments by Courier
-- Filter the shipments by Status
+- Filter by Courier
+- Filter by Status
 - Order the requests by ascending Estimated Departure or Estimated Arrival
 - Filter and order at the same time, combining the options above
 
-If the web app were to lose connectivity, the freight forwarder will be able to filter and see the initial status for the last shipments request he made (by client or all shipments)
+If the web app were to lose connectivity, the user will be able to filter and see the initial status for the last request he made (by client or all packages)
 
 ## Decisions
 
@@ -25,10 +25,10 @@ This app was developed just using React.js and Styled Components:
 
 ## Challenges and To Do
 
-- Having more time in my hands, my first priority would've been testing using Jest.
-- I would have liked to include a counter for the different shipment' statuses.
-- Support to insert more shipments into the list.
-- I would've liked to implement at least PropTypes, and with more time, TypeScript.
+- Testing using Jest.
+- I would have liked to include a counter for the different packages' statuses.
+- Support to insert more packages into the list.
+- I would've liked to implement TypeScript.
 
 ### Initial setup
 
@@ -39,7 +39,7 @@ Run `npm install` at the project directory to install all necessary dependencies
 Before launching the app:
 
 1. Please copy the .env.example file located at the root folder, and rename it to .env.local
-2. Replace the values with the ones I've sent over e-mail.
+2. Request the env.local values which I have privately stored, and place them at the .env.local file.
 
 ### Starting the app
 
@@ -47,4 +47,4 @@ Run `npm start` and open your browser at [http://localhost:3000](http://localhos
 
 ---
 
-Made by [Florencia Vilchez](https://www.linkedin.com/in/florencia-vilchez/) with 💛
+Made by [Florencia Vilchez](https://www.linkedin.com/in/florencia-vilchez/) with 💜
