@@ -4,6 +4,7 @@ import TableData from "../TableData/TableData";
 import Filters from "../Filters/Filters";
 import ClientSelector from "../ClientsSelector/ClientsSelector";
 import * as ui from "./styles";
+import * as uiTable from "../TableData/styles";
 import mainLogo from "../../images/main-logo.png";
 
 const AppContainer = ({
@@ -17,13 +18,9 @@ const AppContainer = ({
   statusFilter,
   modeFilter,
   rows,
-  setRows,
+  rowsRendered,
+  setRowsRendered,
 }) => {
-  const handleClientSelect = (e, client) => {
-    e.stopPropagation();
-    setSelectedClient(client);
-  };
-
   return (
     <>
       <ui.Selector>
@@ -40,30 +37,40 @@ const AppContainer = ({
         ) : (
           <ClientSelector
             clients={clients}
-            handleClientSelect={handleClientSelect}
+            setSelectedClient={setSelectedClient}
           />
         )}
       </ui.Selector>
-      <ui.MainSection>
-        {selectedClient &&
-          (loadingRows ? (
+      {/*The Main Section will only have to think about loading, rendering error or table once the user selects a client */}
+      {selectedClient && (
+        <ui.MainSection>
+          {loadingRows ? (
             <Loader />
           ) : (
             <>
+              {errorMessage.status && (
+                <uiTable.TableContainer>
+                  <tbody>
+                    <uiTable.TableRow>{errorMessage.msg}</uiTable.TableRow>
+                  </tbody>
+                </uiTable.TableContainer>
+              )}
               <Filters
                 modeFilter={modeFilter}
                 statusFilter={statusFilter}
                 rows={rows}
-                setRows={setRows}
+                rowsRendered={rowsRendered}
+                setRowsRendered={setRowsRendered}
               />
               <TableData
                 errorMessage={errorMessage}
                 headerRow={headerRow}
-                rows={rows}
+                rowsRendered={rowsRendered}
               />
             </>
-          ))}
-      </ui.MainSection>
+          )}
+        </ui.MainSection>
+      )}
     </>
   );
 };

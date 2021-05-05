@@ -3,24 +3,31 @@ import React, { useEffect, useState } from "react";
 import AppContainer from "./Components/AppContainer/AppContainer";
 import { createFilter } from "./utils/common";
 import { getRows } from "./helpers/getRows";
-import { getFilteredRows } from "./helpers/getFilteredRows";
+import { filterRowsByClient } from "./helpers/filterRowsByClient";
 import { getHeaderRow } from "./helpers/getHeaderRow";
+import { useLocalStorage } from "./Hooks/useLocalStorage";
 
 const App = () => {
-  const [loadingClients, setLoadingClients] = useState(false);
-  const [loadingHeaderRow, setLoadingHeaderRow] = useState(false);
-  const [loadingRows, setLoadingRows] = useState(false);
-  const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState("");
-  const [rows, setRows] = useState([]);
+
+  //Persisted by Local Storage
+  const [clients, setClients] = useLocalStorage("clients", []);
+  const [modeFilter, setModeFilter] = useLocalStorage("modeFilter", {});
+  const [statusFilter, setStatusFilter] = useLocalStorage("statusFilter", {});
+  const [headerRow, setHeaderRow] = useLocalStorage("headerRow", []);
+  const [rows, setRows] = useLocalStorage("rows", []);
+  const [rowsRendered, setRowsRendered] = useLocalStorage("rowsRendered", []);
+
+  //Loading and errors
+  const [loadingClients, setLoadingClients] = useState();
+  const [loadingRows, setLoadingRows] = useState();
+  const [loadingHeaderRow, setLoadingHeaderRow] = useState();
   const [errorMessage, setErrorMessage] = useState({
     status: false,
     msg: "",
   });
-  const [modeFilter, setModeFilter] = useState({});
-  const [statusFilter, setStatusFilter] = useState({});
-  const [headerRow, setHeaderRow] = useState([]);
 
+  //On mount
   const filterClientsForChips = async () => {
     setLoadingClients(true);
     try {
@@ -33,10 +40,24 @@ const App = () => {
       }
 
       setClients(clientsArray);
+      setLoadingClients(false);
     } catch (err) {
       console.log(err);
-    } finally {
       setLoadingClients(false);
+    }
+  };
+
+  //When selecting client
+  const setFilters = async () => {
+    try {
+      const rowsData = await getRows();
+      let modes = createFilter(rowsData, "Mode");
+      setModeFilter(modes);
+
+      let status = createFilter(rowsData, "Status");
+      setStatusFilter(status);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -44,21 +65,11 @@ const App = () => {
     setLoadingHeaderRow(true);
     try {
       setHeaderRow(await getHeaderRow());
+      setLoadingHeaderRow(false);
     } catch (err) {
       console.log(err);
-    } finally {
       setLoadingHeaderRow(false);
     }
-  };
-
-  const setFilters = () => {
-    const modes = [];
-    const status = [];
-    createFilter(rows, modes, "Mode");
-    setModeFilter(modes);
-
-    createFilter(rows, status, "Status");
-    setStatusFilter(status);
   };
 
   const populateTable = async () => {
@@ -68,8 +79,12 @@ const App = () => {
       msg: "",
     });
     try {
-      const filteredRows = await getFilteredRows(selectedClient);
-      setRows(filteredRows);
+      const rowsData = await getRows();
+      //Saving initial data that will be left untouched
+      setRows(filterRowsByClient(selectedClient, rowsData));
+      //Saving data to be filtered
+      setRowsRendered(filterRowsByClient(selectedClient, rowsData));
+      setLoadingRows(false);
     } catch (err) {
       console.log(err);
       setErrorMessage({
@@ -77,7 +92,6 @@ const App = () => {
         msg:
           "There was an error rendering the table, please refresh and try again.",
       });
-    } finally {
       setLoadingRows(false);
     }
   };
@@ -87,28 +101,26 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    setFilters();
     populateHeaderRow();
     populateTable();
   }, [selectedClient]);
 
-  useEffect(() => {
-    setFilters();
-  }, [rows]);
-
   return (
     <AppContainer
-      headerRow={headerRow}
+      clients={clients}
       selectedClient={selectedClient}
       setSelectedClient={setSelectedClient}
-      clients={clients}
-      loadingClients={loadingClients}
-      loadingRows={loadingRows}
-      loadingHeaderRow={loadingHeaderRow}
-      errorMessage={errorMessage}
       statusFilter={statusFilter}
       modeFilter={modeFilter}
+      headerRow={headerRow}
       rows={rows}
-      setRows={setRows}
+      rowsRendered={rowsRendered}
+      setRowsRendered={setRowsRendered}
+      loadingClients={loadingClients}
+      loadingHeaderRow={loadingHeaderRow}
+      loadingRows={loadingRows}
+      errorMessage={errorMessage}
     />
   );
 };
